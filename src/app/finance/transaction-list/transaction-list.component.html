@@ -1,7 +1,18 @@
 <h3>Transactions</h3>
 <div>
-  <label for="accountId">Account ID:</label>
-  <input id="accountId" placeholder="Account ID" type="number" [(ngModel)]="newAccountId" />
+  <label for="accountId">Account:</label>
+  <select id="accountId" [(ngModel)]="newAccountId">
+    <option [ngValue]="0">-- select --</option>
+    <option *ngFor="let acc of accounts" [ngValue]="acc.id">
+      {{ acc.id }} ({{ acc.name }})
+    </option>
+  </select>
+  <span *ngIf="newAccountId">Balance: {{ getBalance(newAccountId) | number:'1.2-2' }}</span>
+  <label for="type">Type:</label>
+  <select id="type" [(ngModel)]="newType">
+    <option value="CREDIT">Credit</option>
+    <option value="DEBIT">Debit</option>
+  </select>
   <label for="amount">Amount:</label>
   <input id="amount" placeholder="Amount" type="number" [(ngModel)]="newAmount" />
   <label for="date">Date:</label>
@@ -15,6 +26,7 @@
     <tr>
       <th>ID</th>
       <th>Account ID</th>
+      <th>Type</th>
       <th>Amount</th>
       <th>Date</th>
       <th>Description</th>
@@ -25,6 +37,7 @@
     <tr *ngFor="let tx of transactions">
       <td>{{ tx.id }}</td>
       <td>{{ tx.accountId }}</td>
+      <td>{{ tx.type }}</td>
       <td>{{ tx.amount }}</td>
       <td>{{ tx.date }}</td>
       <td>{{ tx.description }}</td>

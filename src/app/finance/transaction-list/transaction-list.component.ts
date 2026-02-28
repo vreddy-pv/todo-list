@@ -12,6 +12,7 @@ import { FinanceService, Transaction } from '../finance.service';
 })
 export class TransactionListComponent implements OnInit {
   transactions: Transaction[] = [];
+  accounts: Account[] = [];
   newAccountId = 0;
   newAmount = 0;
   newDate = '';
@@ -22,6 +23,7 @@ export class TransactionListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadTransactions();
+    this.loadAccounts();
   }
 
   loadTransactions(): void {
@@ -29,6 +31,18 @@ export class TransactionListComponent implements OnInit {
       next: (data) => (this.transactions = data),
       error: (e) => console.error('Failed to load transactions', e)
     });
+  }
+
+  loadAccounts(): void {
+    this.financeService.getAccounts().subscribe({
+      next: (data) => (this.accounts = data),
+      error: (e) => console.error('Failed to load accounts', e)
+    });
+  }
+
+  getBalance(accountId: number): number {
+    const acc = this.accounts.find(a => a.id === accountId);
+    return acc ? acc.balance : 0;
   }
 
   addTransaction(): void {
@@ -46,7 +60,9 @@ export class TransactionListComponent implements OnInit {
         this.newAmount = 0;
         this.newDate = '';
         this.newDescription = '';
+        this.newType = 'CREDIT';
         this.loadTransactions();
+        this.loadAccounts(); // refresh balances
       },
       error: (e) => console.error('Add failed', e)
     });
