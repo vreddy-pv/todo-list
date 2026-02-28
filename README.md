@@ -1,23 +1,59 @@
 # TodoList
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.8.
+This repository contains the standalone Angular frontend for the Todo service. The project was originally part of the `todo-service` backend but has been extracted so it can be developed and deployed independently.
 
-## Development server
+The UI is built with Angular 19.2 and includes the following features:
 
-To start a local development server, run:
+- Todo list management
+- Finance module with account and transaction views
+- Navigation bar and routing configuration
+- Hot module replacement (HMR) during development
+
+## Getting started
 
 ```bash
-ng serve
+# install dependencies (run once)
+npm install
+
+# start development server
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The app will be served at `http://localhost:4200/`. Changes to source files automatically reload the page.
 
-## Code scaffolding
+## Project structure
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+```
+src/
+  app/
+    todo-list/            # todo list component
+    finance/              # finance feature module
+    nav/                  # navigation bar
+  index.html
+  main.ts
+  styles.css
+```
+
+## Repository history
+
+This project was moved out of the monolithic backend repository (`todo-service`) on 2026-02-28. All frontend code lives here, and the GitHub repository is available at:
+
+https://github.com/vreddy-pv/todo-list.git
+
+## Further development
+
+Use the Angular CLI to generate new components or services:
 
 ```bash
-ng generate component component-name
+ng generate component my-component
+```
+
+When ready, build for production with:
+
+```bash
+ng build --configuration production
+```
+
 ```
 
 For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
