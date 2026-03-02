@@ -19,7 +19,7 @@ export interface Transaction {
 
 @Injectable({ providedIn: 'root' })
 export class FinanceService {
-  private readonly apiUrl = 'http://localhost:8081';
+  private readonly apiUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {}
 
